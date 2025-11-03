@@ -1571,3 +1571,212 @@ document.addEventListener('click', (event) => {
     }
   }
 });
+
+///////////////////////////////
+/// MODAL CANDIDATURE SPONTANEE 
+///////////////////////////////
+
+document.addEventListener("DOMContentLoaded", () => {
+  const modalWrap = document.querySelector(".candidature_modal_wrap");
+  const modalBg = document.querySelector(".candidature_modal_bg");
+  const modalLayout = document.querySelector(".candidature_modal_layout");
+  
+  console.log("printing");
+  // Timeline
+  const tl = gsap.timeline({ paused: true, reversed: true })
+    .set(modalWrap, { display: "block" }) // make sure wrapper is visible
+    .from(modalBg, { autoAlpha: 0 }, 0)
+    .from(modalLayout, { y: 50, autoAlpha: 0 }, 0.1);
+
+  // Open modal
+  document.querySelectorAll('[data-action="open-candidature"]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (tl.reversed()) tl.play();
+      lenis.stop();
+    });
+  });
+
+  // Close modal via buttons
+  document.querySelectorAll('[data-action="close-modal"]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!tl.reversed()) tl.reverse();
+      lenis.start();
+    });
+  });
+
+  // Close modal by clicking outside layout
+  modalWrap.addEventListener("click", (e) => {
+    if (!modalLayout.contains(e.target)) {
+      if (!tl.reversed()) tl.reverse();
+      lenis.start();
+    }
+  });
+});
+
+
+///////////////////////////////
+/// Select 
+///////////////////////////////
+
+// // location
+//   Paris
+//   France
+//   International
+
+// // contract
+//   Alternance
+//   CDI
+//   Stage
+//   Saisonnier
+
+// // job
+//   Accueil
+//   Cuisine
+//   Fonctions-supports
+//   Pâtisserie
+//   Salle
+//   Sommellerie
+//   Vente
+
+
+
+// ---- CONFIG: map each combination to a target ID ----
+// Key format: "<location>|<contract>|<job>" (all slugified / lowercase)
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const FORM_SELECTOR = 'form[action^="https://hook.eu2.make.com/6nssds2dd51zql64x58cloreebkxanc9"]';
+
+  // Clé = `${contract}|${job}` (toutes en slug)
+  const ROUTES = {
+    // ALTERNANCE
+    "alternance|accueil": "atak83bydy",
+    "alternance|cuisine": "7rwoakvdow",
+    "alternance|fonctions-supports": "r2nucjuyib",
+    "alternance|patisserie": "2y0escsvro",
+    "alternance|salle": "wlweiwqlex",
+    "alternance|sommellerie": "rk0556z775",
+    "alternance|vente": "y3uyun7ueo",
+    "alternance|logistique": "0hj6w4echg",
+    "alternance|chocolat": "by18xa15bu",            // (= Production chocolat)
+    "alternance|autres": "pjv0wzwb0z",
+
+    // CDI
+    "cdi|accueil": "i0a35br1cg",
+    "cdi|cuisine": "o4wg8sfvvp",
+    "cdi|fonctions-supports": "mocd6us0ac",
+    "cdi|patisserie": "u5k7y8hr9c",
+    "cdi|salle": "498mjtkiab",
+    "cdi|sommellerie": "mjij4vfbkh",
+    "cdi|vente": "irsvg4wxzj",
+    "cdi|logistique": "961xyhn640",
+    "cdi|chocolat": "qq950hlgw4",                   // (= Production chocolat)
+    "cdi|autres": "s4nck56fl1",                     // source "Autre" → slug unifié "autres"
+
+    // STAGE
+    "stage|accueil": "8qz00ah66r",
+    "stage|cuisine": "o9orcg4lq6",
+    "stage|fonctions-supports": "qfn7inr5a3",
+    "stage|patisserie": "59l1h1zkle",
+    "stage|salle": "b8jj0te3q5",
+    "stage|sommellerie": "3n1vfhxyt4",
+    "stage|vente": "w38a8vbc3l",
+    "stage|logistique": "hsacbqtqzy",
+    "stage|chocolat": "abj4tmssyp",                 // (= Production chocolat)
+    "stage|autres": "3tvwei43yo",                   // source "Autre" → slug unifié "autres"
+
+    // CDD / EXTRA
+    "cdd-extra|accueil": "9huepov0gt",
+    "cdd-extra|cuisine": "z39oc7p367",
+    "cdd-extra|fonctions-supports": "y26nwasss0",
+    "cdd-extra|patisserie": "3a2ydyr2kb",
+    "cdd-extra|salle": "tubari9ky6",
+    "cdd-extra|sommellerie": "6wp3cgyojb",
+    "cdd-extra|vente": "1ds5fjbu7t",
+    "cdd-extra|logistique": "soqory5qig",
+    "cdd-extra|chocolat": "7h8hp418a1",             // (= Production chocolat)
+    "cdd-extra|autres": "b078yj9cq3"
+  };
+
+  const form = document.querySelector(FORM_SELECTOR);
+  if (!form) return;
+
+  const wrap = form.closest(".w-form") || form.parentElement;
+  const successEl = wrap && wrap.querySelector(".form_main_success_wrap");
+  const failEl    = wrap && wrap.querySelector(".form_main_fail_wrap");
+  const submitBtn = form.querySelector('[type="submit"]');
+  const widInput  = document.getElementById("wid");
+
+  function slugify(v){
+    return String(v||"")
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+  }
+  function getVal(sel){
+    const el = form.querySelector(sel);
+    return el ? slugify(el.value || "") : "";
+  }
+  // ➜ plus de "location" : clé = contract|job
+  function computeKey(){
+    return `${getVal('select[name="contract"]')}|${getVal('select[name="job"]')}`;
+  }
+  function updateWid(){
+    const key = computeKey();
+    const id  = ROUTES[key] || "";
+    if (widInput) widInput.value = id;
+    console.log("[wid updated]", key, id);
+  }
+
+  function showSuccess(){
+    if (failEl) failEl.style.display = "none";
+    if (successEl) successEl.style.display = "block";
+    form.style.display = "none";
+  }
+  function showFail(msg){
+    if (successEl) successEl.style.display = "none";
+    if (failEl){
+      failEl.style.display = "block";
+      if (msg) failEl.textContent = msg;
+    }
+  }
+
+  form.addEventListener("submit", async (e) => {
+    if (!form.checkValidity()){
+      e.preventDefault();
+      form.reportValidity();
+      return;
+    }
+
+    e.preventDefault();
+
+    updateWid(); // met à jour au submit
+
+    // Si pas de WID trouvé → on bloque l’envoi avec un message propre
+    if (widInput && !widInput.value){
+      showFail("Aucune route trouvée pour cette combinaison (contrat/métier).");
+      return;
+    }
+
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      const fd = new FormData(form);
+      const method = (form.getAttribute("method") || "POST").toUpperCase();
+
+      const resp = await fetch(form.action, { method, body: fd });
+      if (!resp.ok) throw new Error(`Webhook responded ${resp.status} ${resp.statusText}`);
+
+      showSuccess();
+      form.reset();
+    } catch (err){
+      console.error("Submit failed:", err);
+      showFail("Une erreur s'est produite. Veuillez réessayer.");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  }, true);
+});
+
