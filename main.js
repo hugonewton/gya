@@ -1652,52 +1652,52 @@ document.addEventListener("DOMContentLoaded", () => {
   // Clé = `${contract}|${job}` (toutes en slug)
   const ROUTES = {
     // ALTERNANCE
-    "alternance|accueil": "atak83bydy",
-    "alternance|cuisine": "7rwoakvdow",
-    "alternance|fonctions-supports": "r2nucjuyib",
-    "alternance|patisserie": "2y0escsvro",
-    "alternance|salle": "wlweiwqlex",
-    "alternance|sommellerie": "rk0556z775",
-    "alternance|vente": "y3uyun7ueo",
-    "alternance|logistique": "0hj6w4echg",
-    "alternance|chocolat": "by18xa15bu",            // (= Production chocolat)
-    "alternance|autres": "pjv0wzwb0z",
+    "alternance|accueil": "atak83bydy5l",
+    "alternance|cuisine": "7rwoakvdow5l",
+    "alternance|fonctions-supports": "r2nucjuyib5l",
+    "alternance|patisserie": "2y0escsvro5l",
+    "alternance|salle": "wlweiwqlex5l",
+    "alternance|sommellerie": "rk0556z7755l",
+    "alternance|vente": "y3uyun7ueo5l",
+    "alternance|logistique": "0hj6w4echg5l",
+    "alternance|chocolat": "by18xa15bu5l",            // (= Production chocolat)
+    "alternance|autres": "pjv0wzwb0z5l",
 
     // CDI
-    "cdi|accueil": "i0a35br1cg",
-    "cdi|cuisine": "o4wg8sfvvp",
-    "cdi|fonctions-supports": "mocd6us0ac",
-    "cdi|patisserie": "u5k7y8hr9c",
-    "cdi|salle": "498mjtkiab",
-    "cdi|sommellerie": "mjij4vfbkh",
-    "cdi|vente": "irsvg4wxzj",
-    "cdi|logistique": "961xyhn640",
-    "cdi|chocolat": "qq950hlgw4",                   // (= Production chocolat)
-    "cdi|autres": "s4nck56fl1",                     // source "Autre" → slug unifié "autres"
+    "cdi|accueil": "i0a35br1cg5l",
+    "cdi|cuisine": "o4wg8sfvvp5l",
+    "cdi|fonctions-supports": "mocd6us0ac5l",
+    "cdi|patisserie": "u5k7y8hr9c5l",
+    "cdi|salle": "498mjtkiab5l",
+    "cdi|sommellerie": "mjij4vfbkh5l",
+    "cdi|vente": "irsvg4wxzj5l",
+    "cdi|logistique": "961xyhn6405l",
+    "cdi|chocolat": "qq950hlgw45l",                   // (= Production chocolat)
+    "cdi|autres": "s4nck56fl15l",                     // source "Autre" → slug unifié "autres"
 
     // STAGE
-    "stage|accueil": "8qz00ah66r",
-    "stage|cuisine": "o9orcg4lq6",
-    "stage|fonctions-supports": "qfn7inr5a3",
-    "stage|patisserie": "59l1h1zkle",
-    "stage|salle": "b8jj0te3q5",
-    "stage|sommellerie": "3n1vfhxyt4",
-    "stage|vente": "w38a8vbc3l",
-    "stage|logistique": "hsacbqtqzy",
-    "stage|chocolat": "abj4tmssyp",                 // (= Production chocolat)
-    "stage|autres": "3tvwei43yo",                   // source "Autre" → slug unifié "autres"
+    "stage|accueil": "8qz00ah66r5l",
+    "stage|cuisine": "o9orcg4lq65l",
+    "stage|fonctions-supports": "qfn7inr5a35l",
+    "stage|patisserie": "59l1h1zkle5l",
+    "stage|salle": "b8jj0te3q55l",
+    "stage|sommellerie": "3n1vfhxyt45l",
+    "stage|vente": "w38a8vbc3l5l",
+    "stage|logistique": "hsacbqtqzy5l",
+    "stage|chocolat": "abj4tmssyp5l",                 // (= Production chocolat)
+    "stage|autres": "3tvwei43yo5l",                   // source "Autre" → slug unifié "autres"
 
     // CDD / EXTRA
-    "cdd-extra|accueil": "9huepov0gt",
-    "cdd-extra|cuisine": "z39oc7p367",
-    "cdd-extra|fonctions-supports": "y26nwasss0",
-    "cdd-extra|patisserie": "3a2ydyr2kb",
-    "cdd-extra|salle": "tubari9ky6",
-    "cdd-extra|sommellerie": "6wp3cgyojb",
-    "cdd-extra|vente": "1ds5fjbu7t",
-    "cdd-extra|logistique": "soqory5qig",
-    "cdd-extra|chocolat": "7h8hp418a1",             // (= Production chocolat)
-    "cdd-extra|autres": "b078yj9cq3"
+    "cdd-extra|accueil": "9huepov0gt5l",
+    "cdd-extra|cuisine": "z39oc7p3675l",
+    "cdd-extra|fonctions-supports": "y26nwasss05l",
+    "cdd-extra|patisserie": "3a2ydyr2kb5l",
+    "cdd-extra|salle": "tubari9ky65l",
+    "cdd-extra|sommellerie": "6wp3cgyojb5l",
+    "cdd-extra|vente": "1ds5fjbu7t5l",
+    "cdd-extra|logistique": "soqory5qig5l",
+    "cdd-extra|chocolat": "7h8hp418a15l",             // (= Production chocolat)
+    "cdd-extra|autres": "b078yj9cq35l"
   };
 
   const form = document.querySelector(FORM_SELECTOR);
@@ -1779,4 +1779,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, true);
 });
-
